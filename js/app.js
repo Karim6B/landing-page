@@ -40,8 +40,8 @@ const sections = [
       </div>
     `,
 ];
-const ul = document.querySelector("#sections_list");
-
+const sectionsUl = document.querySelector("#sections_list");
+const navUl = document.querySelector("#navbar__list");
 /**
  * End Global Variables
  * Start Helper Functions
@@ -54,8 +54,8 @@ const ul = document.querySelector("#sections_list");
  *
  */
 
+c = 1;
 for (section of sections) {
-  c = 1;
   let li = document.createElement("li");
   let sec = document.createElement("section");
   idAttribute = document.createAttribute("id");
@@ -66,13 +66,52 @@ for (section of sections) {
   sec.setAttributeNode(dataAttribute);
   sec.innerHTML = section;
   li.appendChild(sec);
-  ul.appendChild(li);
+  sectionsUl.appendChild(li);
   c += 1;
 }
 
 // build the nav
 
+c = 1;
+for (section of sections) {
+  let li = document.createElement("li");
+  let a = document.createElement("a");
+  hrefAttribute = document.createAttribute("href");
+  hrefAttribute.value = `#section${c}`;
+  a.setAttributeNode(hrefAttribute);
+  a.textContent = `Section ${c}`;
+  li.appendChild(a);
+  navUl.appendChild(li);
+  c += 1;
+}
 // Add class 'active' to section when near top of viewport
+
+// window.addEventListener("scroll", () => {
+//   const sections = document.querySelectorAll("section");
+//   sections.forEach((el) => {
+//     position = el.getBoundingClientRect();
+//     if (position.top >= 20 && position.bottom <= window.innerHeight) {
+//       el.classList.add("your-active-class");
+//     } else {
+//       el.classList.remove("your-active-class");
+//     }
+//   });
+// });
+
+let observer = new IntersectionObserver(
+  (entries) => {
+    if (entries[0].isIntersecting === true) {
+      entries[0].target.classList.add("your-active-class");
+    } else {
+      entries[0].target.classList.remove("your-active-class");
+    }
+  },
+  { threshold: [0.5] }
+);
+
+document.querySelectorAll("section").forEach((el) => {
+  observer.observe(el);
+});
 
 // Scroll to anchor ID using scrollTO event
 
