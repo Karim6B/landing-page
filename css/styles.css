@@ -8,6 +8,7 @@
  *
 */
 
+  
 
 /* ---- Base Rules ---- */
 body {
@@ -64,6 +65,10 @@ section {
 /* ---- Module Rules ---- */
 
 /* Navigation Styles*/
+.navbar__menu{
+    background-color: darkcyan;
+    padding: 10px;
+}
 .navbar__menu ul {
     padding-left: 0;
     margin: 0;
@@ -72,6 +77,21 @@ section {
 
 .navbar__menu li {
     display: inline-block;
+    margin: 5px 8px;
+}
+
+.navbar__menu li a:link,
+.navbar__menu li a:visited
+{
+    color:#fff;
+    text-decoration: none;
+    padding: 15px 6px;
+}
+
+.navbar__menu li a:hover,
+.navbar__menu li a:active
+{
+    background-color: rgb(0, 97, 97);
 }
 
 .navbar__menu .menu__link {
