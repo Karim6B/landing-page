@@ -25,6 +25,7 @@ const navUl = document.querySelector("#navbar__list");
  * Start Helper Functions
  *
  */
+// building an observer which adds an active class to the section when in viewport
 let observer = new IntersectionObserver(
   (entries) => {
     if (entries[0].isIntersecting === true) {
@@ -45,10 +46,11 @@ let observer = new IntersectionObserver(
 // build the nav
 
 const buildNav = () => {
+  // iterating over the sections and building a li and anchor elements to make a navbar link for each section
   sectionsUl.forEach((el) => {
     let li = document.createElement("li");
     let a = document.createElement("a");
-    hrefAttribute = document.createAttribute("href");
+    const hrefAttribute = document.createAttribute("href");
     hrefAttribute.value = el.id;
     a.setAttributeNode(hrefAttribute);
     a.textContent = el.dataset.nav;
@@ -67,10 +69,11 @@ const activate = () => {
 
 // Scroll to anchor ID using scrollTO event
 const scrollToSection = () => {
-  anchors = document.querySelectorAll("a");
+  const anchors = document.querySelectorAll("a");
   anchors.forEach((el) => {
     el.addEventListener("click", (e) => {
       e.preventDefault();
+      // select the section whose ID is the same as the href attribute of the clicked link
       const section = document.querySelector(
         `#${e.target.getAttribute("href")}`
       );
